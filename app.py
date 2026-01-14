@@ -235,7 +235,9 @@ if not USE_CSV:
     conn = st.connection("gsheets", type=GSheetsConnection)
 
 if "CURRENT_MONTH" not in st.session_state:
-    st.session_state["CURRENT_MONTH"] = date.today().strftime("%Y %B")
+    st.session_state["CURRENT_MONTH"] = (
+        date.today().strftime("%Y %B") if not USE_CSV else "2025 July"
+    )
 if "LOCATIONS_LIST" not in st.session_state:
     st.session_state["LOCATIONS_LIST"] = LOCATIONS_LIST
 if "LOCATION_RESOURCE_ID_MAP" not in st.session_state:
@@ -317,11 +319,10 @@ Registration is not required, and participants are admitted on a first-come, fir
 
         # styled_df = processed_df.apply(highlight_today, axis=1)
 
-
         # Table View
         st.dataframe(
             processed_df,
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
             column_config={
                 "date": st.column_config.DateColumn("Date", format="YYYY/MM/DD"),
