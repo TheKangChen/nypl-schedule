@@ -210,11 +210,11 @@ def get_calender_event_list(df: pd.DataFrame) -> list[dict]:
 def get_day_view_date(month_str: str, cur_month: str) -> str:
     year, month_name = month_str.split()
     month_number = datetime.strptime(month_name, "%B").month
-
+    cur_month_number = datetime.strptime(cur_month.split()[-1], "%B").month
     return (
         f"{year}-{month_number:02d}-01"
         if month_str != cur_month
-        else date.today().strftime("%Y-%m-%d")
+        else f"{year}-{cur_month_number:02d}-01"
     )
 
 
