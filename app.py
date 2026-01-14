@@ -319,11 +319,10 @@ Registration is not required, and participants are admitted on a first-come, fir
 
         # styled_df = processed_df.apply(highlight_today, axis=1)
 
-
         # Table View
         st.dataframe(
             processed_df,
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
             column_config={
                 "date": st.column_config.DateColumn("Date", format="YYYY/MM/DD"),
